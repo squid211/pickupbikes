@@ -5,13 +5,16 @@ local bmxID = 1131912276
 
 
 local models = {
-    `bmx`,
     `cruiser`,
    `scorcher`,
    `fixter`,
    `tribike`,
    `tribike2`,
    `tribike3`,
+}
+
+local bmxmo = {
+    `bmx`,
 }
 
 exports['qb-target']:AddTargetModel(models, {
@@ -22,17 +25,17 @@ exports['qb-target']:AddTargetModel(models, {
             icon = "fas fa-bicycle",
             label = "Pickup Bike",
         },
-    },
-    distance = 2.0
+	},
+	distance = 2.0,
 })
 
-exports['qb-target']:AddTargetModel(models, {
-	options = {
+exports['qb-target']:AddTargetModel(bmxmo, {
+    options = {
 		{
+		    type = 'event',
 			event = 'fetchBMX',
-            type = 'event',
 			icon = "fa fa-bicycle",
-			label = "Pickup BMX",
+			label = "Pickup Bike",
 		},
 	},
 	distance = 2.0,
@@ -120,7 +123,7 @@ RegisterNetEvent('placeBike', function(prim,sec,perl,plate)
     end
 end)
 
-    RegisterNetEvent('fetchBMX', function()
+RegisterNetEvent('fetchBMX', function()
         local playerPed = PlayerPedId()
         local playerCoords = GetEntityCoords(playerPed)
         local bmxEntity, closestDistance = QBCore.Functions.GetClosestVehicle(playerCoords)
